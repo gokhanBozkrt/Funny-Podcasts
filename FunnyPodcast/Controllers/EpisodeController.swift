@@ -132,12 +132,6 @@ class EpisodeController: UITableViewController {
 //            cell.episodeDescription.text = attributedString.string
 //        }
         
-        let url = URL(string: episode.imageUrl?.toSecureHttps() ?? "")
-        let scale = UIScreen.main.scale
-        let thumbnailSize = CGSize(width: 50 * scale, height: 50 * scale)
-        cell.episodeImageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
-        
-        
         cell.episode = episode
         
         return cell
@@ -185,6 +179,21 @@ class EpisodeController: UITableViewController {
 
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let downloadAction = UIContextualAction(
+            style: .normal,
+            title: "Download",
+            handler:  { _,_,_ in
+                let episode = self.episodes[indexPath.row]
+                UserDefaults.downloadEpisode(episode: episode)
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
+        
+        let configuration = UISwipeActionsConfiguration(actions: [downloadAction])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
+    }
 }
 
 

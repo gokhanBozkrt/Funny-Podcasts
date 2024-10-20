@@ -34,7 +34,10 @@ class EpisodeCell: UITableViewCell {
             dateFormatter.dateFormat = "dd MMM,yyyy"
             pubDateLabel.text = dateFormatter.string(from: episode.pubDate)
             
-    
+            let url = URL(string: episode.imageUrl?.toSecureHttps() ?? "")
+            let scale = UIScreen.main.scale
+            let thumbnailSize = CGSize(width: 50 * scale, height: 50 * scale)
+            episodeImageView.sd_setImage(with: url, placeholderImage: nil, context: [.imageThumbnailPixelSize : thumbnailSize])
             
         }
     }

@@ -8,8 +8,8 @@
 import FeedKit
 import Foundation
 
-struct Episode: Identifiable {
-    let id = UUID()
+struct Episode: Identifiable,Codable {
+    var id = UUID()
     let title: String
     let pubDate: Date
     let description: String

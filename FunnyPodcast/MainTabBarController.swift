@@ -25,7 +25,7 @@ class MainTabBarController: UITabBarController {
         viewControllers = [
         generateNavigationController(with: favouritesController, title: "Favourites", image: "play.circle"),
         generateNavigationController(with: PodcastsSearchController(), title: "Search", image: "magnifyingglass"),
-        generateNavigationController(with: ViewController(), title: "Downloads", image: "arrow.down.square.fill")
+        generateNavigationController(with: DownloadsController(), title: "Downloads", image: "arrow.down.square.fill")
         ]
         
         setupPlayerDetailView()
