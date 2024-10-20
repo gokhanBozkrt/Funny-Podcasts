@@ -12,7 +12,7 @@ fileprivate let cellId = "cellid"
 
 class FavouritesController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
     
-    var podcasts: [Podcast] = UserDefaults.getSavedPodcasts() ?? []
+    var podcasts: [Podcast] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +21,13 @@ class FavouritesController: UICollectionViewController,UICollectionViewDelegateF
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector (handleLongPress))
         collectionView.addGestureRecognizer(gesture)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.mainTabBarController()?.viewControllers?[0].tabBarItem.badgeValue = nil
+        podcasts = UserDefaults.getSavedPodcasts() ?? []
+        collectionView.reloadData()
     }
 
     @objc func handleLongPress(gesture: UILongPressGestureRecognizer) {
@@ -59,6 +66,12 @@ class FavouritesController: UICollectionViewController,UICollectionViewDelegateF
         cell.podcast = podcasts[indexPath.row]
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let episodeController = EpisodeController()
+        episodeController.podcast = podcasts[indexPath.row]
+        navigationController?.pushViewController(episodeController, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

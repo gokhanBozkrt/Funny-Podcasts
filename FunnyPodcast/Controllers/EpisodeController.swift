@@ -26,6 +26,12 @@ class EpisodeController: UITableViewController {
         }
     }
     
+    var listOfPodcasts = UserDefaults.getSavedPodcasts() ?? [Podcast]()
+
+    
+    var favouriteBarButtonItem: UIBarButtonItem?
+       
+    
     var episodes = [Episode]()
     
     override func viewDidLoad() {
@@ -35,21 +41,18 @@ class EpisodeController: UITableViewController {
     }
     
     fileprivate func setupNavigationBarButtons() {
-        navigationItem.rightBarButtonItems =  [
-            UIBarButtonItem(
-            title: "Favourite",
+        
+        self.favouriteBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "heart"),
             style: .plain,
             target: self,
             action: #selector(handleSaveFavourite)
-        ),
-          
-            UIBarButtonItem(
-            title: "Fetch",
-            style: .plain,
-            target: self,
-            action: #selector(handleFetchSavedPodcasts)
             )
-            ]
+        
+        
+        
+            navigationItem.rightBarButtonItem = favouriteBarButtonItem
+        
     }
     
     @objc func handleFetchSavedPodcasts() {
@@ -63,18 +66,34 @@ class EpisodeController: UITableViewController {
         
         guard let podcast = podcast else { return }
         
-        var listOfPodcasts = UserDefaults.getSavedPodcasts() ?? [Podcast]()
-                
-        listOfPodcasts.append(podcast)
         
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: false)
+        if listOfPodcasts.contains(where: { $0.trackName == podcast.trackName && $0.artistName == podcast.artistName }) == false {
             
-            UserDefaults.standard.setValue(data, forKey: UserDefaults.favouritedPodcastKey)
+            listOfPodcasts.append(podcast)
             
-        } catch {
-            print(FavouritesError.unsaved)
+            self.favouriteBarButtonItem?.image = UIImage(systemName: "heart.fill")
+            
+            showBadgeHighlight()
+            
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: listOfPodcasts, requiringSecureCoding: false)
+                
+                UserDefaults.standard.setValue(data, forKey: UserDefaults.favouritedPodcastKey)
+                
+            } catch {
+                print(FavouritesError.unsaved)
+            }
+        } else {
+            print("Already saved")
         }
+                
+       
+        
+      
+    }
+    
+    private func showBadgeHighlight() {
+        UIApplication.mainTabBarController()?.viewControllers?[0].tabBarItem.badgeValue = "New"
     }
     
     fileprivate func fetchEpisode() {
