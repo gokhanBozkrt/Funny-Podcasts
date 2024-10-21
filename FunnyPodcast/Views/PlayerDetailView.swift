@@ -337,7 +337,22 @@ class PlayerDetailView: UIView {
     }
     
     fileprivate func playEpisode() {
-        guard let url = URL(string: episode.streamUrl) else { return }
+        
+        var url: URL
+        
+        if episode.downloadedURL != nil {
+            
+            let fileName = episode.downloadedURL!.lastPathComponent
+            
+            let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
+             url = documentsDirectory.appendingPathComponent(fileName)
+      
+        } else {
+            guard let streamURL = URL(string: episode.streamUrl) else { return }
+            url = streamURL
+            print("play on the net")
+        }
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
     }

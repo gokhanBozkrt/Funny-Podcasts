@@ -47,4 +47,12 @@ extension DownloadsController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 134
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let episode = episodes[indexPath.row]
+        
+        if episode.downloadedURL != nil {
+            UIApplication.mainTabBarController()?.maximizePlayerDetails(episode: episode,playlistEpisodes: episodes)
+        }
+    }
 }

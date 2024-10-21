@@ -15,7 +15,14 @@ class APIService {
     
     private init() { }
     
+    
     let baseiTunesSearchUrl = "https://itunes.apple.com/search"
+    
+    func downloadEpisode(episode: Episode) {
+        let downloadManager = DownloadManager(episode: episode)
+        downloadManager.startDownload()
+
+    }
     
     func fetchEpisodes(for feedUrlString: String, complitionHandler: @escaping ([Episode]) -> ()) {
         

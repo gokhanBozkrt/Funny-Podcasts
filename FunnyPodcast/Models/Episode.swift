@@ -16,6 +16,7 @@ struct Episode: Identifiable,Codable {
     var imageUrl: String?
     var author: String
     let streamUrl: String
+    var downloadedURL: URL?
     
     init(feedItem: RSSFeedItem) {
         self.title = feedItem.title ?? ""

@@ -186,8 +186,10 @@ class EpisodeController: UITableViewController {
             title: "Download",
             handler:  { _,_,_ in
                 let episode = self.episodes[indexPath.row]
+                APIService.shared.downloadEpisode(episode: episode)
                 UserDefaults.downloadEpisode(episode: episode)
-                tableView.reloadRows(at: [indexPath], with: .automatic)
+                tableView.reloadRows(at: [indexPath], with: .none)
+                
             })
         
         let configuration = UISwipeActionsConfiguration(actions: [downloadAction])

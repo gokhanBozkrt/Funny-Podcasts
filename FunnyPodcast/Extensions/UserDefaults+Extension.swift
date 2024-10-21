@@ -49,6 +49,25 @@ extension UserDefaults {
         return episodes
     }
     
+    static func updateDownloadedURL(for episode: Episode,location: URL) {
+        
+        var downloadedEpisodes = getDownloadedEpisodes()
+        
+        guard let index = downloadedEpisodes.firstIndex(where: {$0.title == episode.title && $0.author == episode.author }) else { return }
+        downloadedEpisodes[index].downloadedURL = location
+        
+        let encoder = JSONEncoder()
+
+        do {
+            let data = try encoder.encode(downloadedEpisodes)
+            
+            UserDefaults.standard.set(data, forKey: UserDefaults.downloadEpisodeKey)
+        } catch {
+            print("Encode Error")
+        }
+        
+    }
+    
     static func getSavedPodcasts() -> [Podcast]? {
         
          let fetchedValue = UserDefaults.standard.data(forKey: UserDefaults.favouritedPodcastKey)
@@ -80,5 +99,4 @@ extension UserDefaults {
             print(error.localizedDescription)
         }
     }
-    
 }
