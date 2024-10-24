@@ -84,6 +84,7 @@ extension DownloadManager {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 downloadProgress = String(format: "%.2f%%", progress * 100)
+                NotificationCenter.default.post(name: .downloadProgressNotification, object: nil,userInfo: ["title": episode?.title ?? "", "progress": downloadProgress])
                 print("Download Progress: \(downloadProgress)")
             }
             

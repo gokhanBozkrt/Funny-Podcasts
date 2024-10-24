@@ -14,6 +14,7 @@
 		7DC6C7EC2CC64AFF0073DD1E /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC6C7EB2CC64AFF0073DD1E /* DownloadManager.swift */; };
 		7DC8003E2CC55F770067DB14 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC8003D2CC55F770067DB14 /* UIApplication+Extension.swift */; };
 		7DC800402CC56BB60067DB14 /* DownloadsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC8003F2CC56BB60067DB14 /* DownloadsController.swift */; };
+		7DDFA66D2CC90CA10025CB31 /* NotificationCenter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDFA66C2CC90CA10025CB31 /* NotificationCenter+Extension.swift */; };
 		F7351A022BF79BC60005BBCB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7351A012BF79BC60005BBCB /* UIViewController+Extension.swift */; };
 		F756ED7E2BECB1B30037611D /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F756ED7C2BECB1B30037611D /* EpisodeCell.swift */; };
 		F756ED7F2BECB1B30037611D /* EpisodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F756ED7D2BECB1B30037611D /* EpisodeCell.xib */; };
@@ -46,6 +47,7 @@
 		7DC6C7EB2CC64AFF0073DD1E /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
 		7DC8003D2CC55F770067DB14 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		7DC8003F2CC56BB60067DB14 /* DownloadsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsController.swift; sourceTree = "<group>"; };
+		7DDFA66C2CC90CA10025CB31 /* NotificationCenter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Extension.swift"; sourceTree = "<group>"; };
 		F279B256205669998D86094F /* Pods_FunnyPodcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FunnyPodcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7351A012BF79BC60005BBCB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		F756ED7C2BECB1B30037611D /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				F7351A012BF79BC60005BBCB /* UIViewController+Extension.swift */,
 				7D3616792CAACC9D003647A1 /* UserDefaults+Extension.swift */,
 				7DC8003D2CC55F770067DB14 /* UIApplication+Extension.swift */,
+				7DDFA66C2CC90CA10025CB31 /* NotificationCenter+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				7DC8003E2CC55F770067DB14 /* UIApplication+Extension.swift in Sources */,
 				F760491F2BBA9766008CF6D1 /* PodcastsSearchController.swift in Sources */,
 				7D9B5FC52CA1F418006DD17C /* FavouritesCell.swift in Sources */,
+				7DDFA66D2CC90CA10025CB31 /* NotificationCenter+Extension.swift in Sources */,
 				F7A48AE62BEB684C009FC035 /* APIService.swift in Sources */,
 				7D9B5FC32CA1E038006DD17C /* FavouritesController.swift in Sources */,
 				7DC6C7EC2CC64AFF0073DD1E /* DownloadManager.swift in Sources */,

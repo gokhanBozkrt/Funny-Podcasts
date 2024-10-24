@@ -17,6 +17,7 @@ class DownloadsController: UITableViewController {
         super.viewDidLoad()
         
         setupTableView()
+        setupObservers()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,7 +30,34 @@ class DownloadsController: UITableViewController {
         tableView.register(nib, forCellReuseIdentifier: cellId)
         
     }
+    
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDownloadProgress), name: .downloadProgressNotification, object: nil)
+    }
+    
+    @objc private func handleDownloadProgress(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        
+        let progress = userInfo["progress"] as? String
+        let episodeTitle = userInfo["title"] as? String
+        
+        guard let index = self.episodes.firstIndex(where: { $0.title == episodeTitle }) else { return }
+        
+        guard let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? EpisodeCell else { return }
+        UIView.animate(withDuration: 1) {
+            cell.progressLabel.text = progress
 
+        }
+        cell.progressLabel.isHidden = false
+        
+        if progress == "100.00%" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                UIView.animate(withDuration: 1) {
+                    cell.progressLabel.isHidden = true
+                }
+            }
+        }
+    }
 }
 
 
